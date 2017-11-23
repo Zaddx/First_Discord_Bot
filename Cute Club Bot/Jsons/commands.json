@@ -1,0 +1,4 @@
+{ 	// 0 == True == Enable, 1 == False == Disabled
+	"Disable Command" : "0",
+	"Change Nickname" : "0",	
+}
