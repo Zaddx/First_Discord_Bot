@@ -12,9 +12,12 @@ namespace Cute_Club_Bot.Modules
 {
     public class ChangeAvatar : ModuleBase
     {
-        [Command("Avatar")]
+        [Command("Avatar"), RequireOwner]
         public async Task Avatar ()
         {
+            var O = Context.Guild.OwnerId;
+            if (O != Context.Message.Author.Id) return;
+
             var attachments = Context.Message.Attachments;
             foreach (IAttachment attachment in attachments)
             {
