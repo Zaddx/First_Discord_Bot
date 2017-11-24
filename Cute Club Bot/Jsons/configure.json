@@ -2,5 +2,6 @@
 	"Owner Prefix" 		: "c*",
 	"Admin Prefix" 		: "c@",
 	"Mod Prefix"   		: "c#",
-	"Everyone Prefix" 	: "c!"	
+	"Everyone Prefix" 	: "c!",
+	"Invite Channel"	: "General",
 }
