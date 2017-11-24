@@ -1,12 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Discord.Commands;
 using System.Net.Http;
-using System.Net;
-using SixLabors.ImageSharp;
 using System.IO;
-using Newtonsoft.Json.Linq;
 using Discord;
-using System;
 
 namespace Cute_Club_Bot.Modules
 {
