@@ -6,6 +6,7 @@ using System;
 using System.Reflection;
 using System.Threading.Tasks;
 using Cute_Club_Bot.Jsons;
+using Cute_Club_Bot.Modules;
 
 namespace Cute_Club_Bot
 {
@@ -14,8 +15,9 @@ namespace Cute_Club_Bot
         static void Main(string[] args) => new Program().RunBotAsync().GetAwaiter().GetResult();
 
         private DiscordSocketClient _client;
-        private CommandService      _commands;
-        private IServiceProvider    _services;
+        private CommandService _commands;
+        private IServiceProvider _services;
+        private ICommandContext _context;
 
         // Get the bot settings
         BotSettings _botSettings = new BotSettings();
@@ -43,6 +45,14 @@ namespace Cute_Club_Bot
 
             await _client.StartAsync();
 
+            // Keep the programming running
+            //while (true)
+            //{
+            //    await Task.Delay(1000);
+            //    // Check the temp channels
+            //    await CreateTemporaryChannel.CheckTemporaryChannels(_context);
+            //}
+
             await Task.Delay(-1);
         }
 
@@ -63,9 +73,9 @@ namespace Cute_Club_Bot
 
             if (message.HasStringPrefix("t!", ref argPos) || message.HasMentionPrefix(_client.CurrentUser, ref argPos))
             {
-                var context = new SocketCommandContext(_client, message);
+                _context = new SocketCommandContext(_client, message);
 
-                var result = await _commands.ExecuteAsync(context, argPos, _services);
+                var result = await _commands.ExecuteAsync(_context, argPos, _services);
 
                 if (!result.IsSuccess)
                     Console.Write(result.ErrorReason);

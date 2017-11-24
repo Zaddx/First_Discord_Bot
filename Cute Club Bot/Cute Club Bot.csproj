@@ -138,6 +138,7 @@
     <Compile Include="Jsons\BotSettings.cs" />
     <Compile Include="Modules\ChangeAvatar.cs" />
     <Compile Include="Modules\ChangeNickname.cs" />
+    <Compile Include="Modules\CreateInstantInvite.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
