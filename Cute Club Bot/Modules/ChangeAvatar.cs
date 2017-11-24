@@ -3,6 +3,7 @@ using Discord.Commands;
 using System.Net.Http;
 using System.IO;
 using Discord;
+using Cute_Club_Bot.Jsons;
 
 namespace Cute_Club_Bot.Modules
 {
@@ -26,6 +27,10 @@ namespace Cute_Club_Bot.Modules
                     {
                         u.Avatar = new Discord.Image(stream);
                     });
+
+                    BotSettings temp = new BotSettings();
+                    temp.botSettings.Avatar = attachment.Url;
+                    temp.Serialize();
                 }
             }
         }

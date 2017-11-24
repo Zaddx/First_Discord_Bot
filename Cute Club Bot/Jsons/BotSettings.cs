@@ -12,6 +12,9 @@ namespace Cute_Club_Bot.Jsons
 
             [JsonProperty("Nickname")]
             public string Nickname { get; set; }
+
+            [JsonProperty("Avatar")]
+            public string Avatar { get; set; }
         }
 
         public Bot_Info botSettings;
@@ -23,6 +26,7 @@ namespace Cute_Club_Bot.Jsons
             Bot_Info settings = JsonConvert.DeserializeObject<Bot_Info>(json);
             botSettings.Token = settings.Token;
             botSettings.Nickname = settings.Nickname;
+            botSettings.Avatar = settings.Avatar;
             r.Close();
         }
 
