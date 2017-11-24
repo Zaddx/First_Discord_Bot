@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Reflection;
 using System.Threading.Tasks;
+using Cute_Club_Bot.Jsons;
 
 namespace Cute_Club_Bot
 {
@@ -15,6 +16,9 @@ namespace Cute_Club_Bot
         private DiscordSocketClient _client;
         private CommandService      _commands;
         private IServiceProvider    _services;
+
+        // Get the bot settings
+        BotSettings _botSettings = new BotSettings();
 
         public async Task RunBotAsync()
         {
@@ -30,14 +34,12 @@ namespace Cute_Club_Bot
                 .AddSingleton(_commands)
                 .BuildServiceProvider();
 
-            string botToken = "MzcyMzc5MDg3MDQzNDI4MzYy.DPXMsw.2MWdspITY-b53-sosAP9A9Yzfr4";
-
             // Event Subscription
             _client.Log += Log;
 
             await RegisterCommandsAsync();
 
-            await _client.LoginAsync(TokenType.Bot, botToken);
+            await _client.LoginAsync(TokenType.Bot, _botSettings.botSettings.Token);
 
             await _client.StartAsync();
 
@@ -59,7 +61,7 @@ namespace Cute_Club_Bot
 
             int argPos = 0;
 
-            if (message.HasStringPrefix("tnt!", ref argPos) || message.HasMentionPrefix(_client.CurrentUser, ref argPos))
+            if (message.HasStringPrefix("t!", ref argPos) || message.HasMentionPrefix(_client.CurrentUser, ref argPos))
             {
                 var context = new SocketCommandContext(_client, message);
 
