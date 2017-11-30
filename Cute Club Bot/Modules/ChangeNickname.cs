@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Discord.Commands;
 using Cute_Club_Bot.Jsons;
+using Cute_Club_Bot.Logging;
 
 namespace Cute_Club_Bot.Modules
 {
@@ -27,8 +28,7 @@ namespace Cute_Club_Bot.Modules
             });
 
             await ReplyAsync($"Nickname has been changed to {pNickname} successfully.");
-            var dm = await C.GetOrCreateDMChannelAsync();
-            await dm.SendMessageAsync($"{Context.Message.Author} changed bot nickname to {pNickname}.");
+            new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author} changed bot nickname to {pNickname}.");
         }
     }
 }
