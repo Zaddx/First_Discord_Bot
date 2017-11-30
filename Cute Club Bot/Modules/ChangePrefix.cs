@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Discord;
 using Discord.Commands;
 using Cute_Club_Bot.Jsons;
-using Discord.WebSocket;
+using Cute_Club_Bot.Logging;
 
 namespace Cute_Club_Bot.Modules
 {
@@ -27,8 +25,7 @@ namespace Cute_Club_Bot.Modules
             botConfig.Serialize();
 
             await ReplyAsync($"The everyone prefix has been changed to {prefix} successfully.");
-            var dm = await C.GetOrCreateDMChannelAsync();
-            await dm.SendMessageAsync($"{Context.Message.Author} changed everyone prefix to {prefix}.");
+            new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author} changed everyone prefix to {prefix}.");
         }
 
         [Command("Mod")]
@@ -45,8 +42,7 @@ namespace Cute_Club_Bot.Modules
             botConfig.Serialize();
 
             await ReplyAsync($"The mod prefix has been changed to {prefix} successfully.");
-            var dm = await C.GetOrCreateDMChannelAsync();
-            await dm.SendMessageAsync($"{Context.Message.Author} changed everyone prefix to {prefix}.");
+            new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author} changed everyone prefix to {prefix}.");
         }
 
         [Command("Admin")]
@@ -63,8 +59,7 @@ namespace Cute_Club_Bot.Modules
             botConfig.Serialize();
 
             await ReplyAsync($"The admin prefix has been changed to {prefix} successfully.");
-            var dm = await C.GetOrCreateDMChannelAsync();
-            await dm.SendMessageAsync($"{Context.Message.Author} changed everyone prefix to {prefix}.");
+            new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author} changed everyone prefix to {prefix}.");
         }
 
         [Command("Owner")]
@@ -81,8 +76,7 @@ namespace Cute_Club_Bot.Modules
             botConfig.Serialize();
 
             await ReplyAsync($"The owner prefix has been changed to {prefix} successfully.");
-            var dm = await C.GetOrCreateDMChannelAsync();
-            await dm.SendMessageAsync($"{Context.Message.Author} changed everyone prefix to {prefix}.");
+            new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author} changed everyone prefix to {prefix}.");
         }
     }
 }

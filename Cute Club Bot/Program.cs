@@ -21,7 +21,6 @@ namespace Cute_Club_Bot
 
         // Get the bot settings
         BotSettings _botSettings = new BotSettings();
-        BotConfiguration _botConfig = new BotConfiguration();
 
         public async Task RunBotAsync()
         {
@@ -45,6 +44,8 @@ namespace Cute_Club_Bot
             await _client.LoginAsync(TokenType.Bot, _botSettings.settings.Token);
 
             await _client.StartAsync();
+
+            
 
             // Keep the programming running
             //while (true)
@@ -72,10 +73,10 @@ namespace Cute_Club_Bot
 
             int argPos = 0;
 
-            if (message.HasStringPrefix(_botConfig.config.Everyone_Prefix, ref argPos) ||
-                message.HasStringPrefix(_botConfig.config.Mod_Prefix, ref argPos) ||
-                message.HasStringPrefix(_botConfig.config.Admin_Prefix, ref argPos) ||
-                message.HasStringPrefix(_botConfig.config.Owner_Prefix, ref argPos) ||
+            if (message.HasStringPrefix(new BotConfiguration().config.Everyone_Prefix, ref argPos) ||
+                message.HasStringPrefix(new BotConfiguration().config.Mod_Prefix, ref argPos) ||
+                message.HasStringPrefix(new BotConfiguration().config.Admin_Prefix, ref argPos) ||
+                message.HasStringPrefix(new BotConfiguration().config.Owner_Prefix, ref argPos) ||
                 message.HasMentionPrefix(_client.CurrentUser, ref argPos))
             {
                 _context = new SocketCommandContext(_client, message);
