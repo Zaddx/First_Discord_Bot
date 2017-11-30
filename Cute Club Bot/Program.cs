@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Cute_Club_Bot.Jsons;
 using Cute_Club_Bot.Modules;
+using System.IO;
 
 namespace Cute_Club_Bot
 {
@@ -27,7 +28,8 @@ namespace Cute_Club_Bot
             _client = new DiscordSocketClient(new DiscordSocketConfig
             {
                 //(WebSocketProvider = WS4NetProvider.Instance,)
-                LogLevel = LogSeverity.Verbose
+                LogLevel = LogSeverity.Verbose,
+                MessageCacheSize = 1000,
             });
             _commands = new CommandService();
 
@@ -38,6 +40,7 @@ namespace Cute_Club_Bot
 
             // Event Subscription
             _client.Log += Log;
+            _client.MessageDeleted += MessageDeletedLogger;
 
             await RegisterCommandsAsync();
 
@@ -45,17 +48,17 @@ namespace Cute_Club_Bot
 
             await _client.StartAsync();
 
-            
-
-            // Keep the programming running
-            //while (true)
-            //{
-            //    await Task.Delay(1000);
-            //    // Check the temp channels
-            //    await CreateTemporaryChannel.CheckTemporaryChannels(_context);
-            //}
-
             await Task.Delay(-1);
+        }
+
+        private async Task MessageDeletedLogger(Cacheable<IMessage, ulong> arg1, ISocketMessageChannel arg2)
+        {
+            StreamWriter file = File.AppendText("../../Logging/deletionlog.txt");
+            file.Write($"[{arg1.Value.Timestamp}] {arg1.Value.Author}: {arg1.Value.Content}");
+            file.Close();
+            var u = _client.GetUser(arg1.Value.Author.Id);
+            var dmChannel = await u.GetOrCreateDMChannelAsync();
+            await dmChannel.SendMessageAsync("Your message was deleted and has been logged.");
         }
 
         private async Task RegisterCommandsAsync()
