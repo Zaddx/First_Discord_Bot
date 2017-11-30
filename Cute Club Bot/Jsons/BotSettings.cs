@@ -17,16 +17,16 @@ namespace Cute_Club_Bot.Jsons
             public string Avatar { get; set; }
         }
 
-        public Bot_Info botSettings;
+        public Bot_Info settings;
 
         public BotSettings()
         {
             StreamReader r = new StreamReader("../../Jsons/botsettings.json");
             string json = r.ReadToEnd();
             Bot_Info settings = JsonConvert.DeserializeObject<Bot_Info>(json);
-            botSettings.Token = settings.Token;
-            botSettings.Nickname = settings.Nickname;
-            botSettings.Avatar = settings.Avatar;
+            this.settings.Token = settings.Token;
+            this.settings.Nickname = settings.Nickname;
+            this.settings.Avatar = settings.Avatar;
             r.Close();
         }
 
@@ -34,7 +34,7 @@ namespace Cute_Club_Bot.Jsons
         {
             StreamWriter file = File.CreateText("../../Jsons/botsettings.json");
             JsonSerializer serializer = new JsonSerializer();
-            serializer.Serialize(file, botSettings);
+            serializer.Serialize(file, settings);
             file.Close();
         }
     }
