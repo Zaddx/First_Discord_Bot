@@ -1,4 +1,6 @@
 { 	// 0 == True == Enable, 1 == False == Disabled
-	"Disable Command" : "0",
-	"Change Nickname" : "0",	
+	"Change Avatar" : "0",
+	"Change Nickname" : "0",
+	"Change Prefix" : "0",
+	"CreateInstantInvite" : "0",
 }
