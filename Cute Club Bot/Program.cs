@@ -41,6 +41,7 @@ namespace Cute_Club_Bot
             // Event Subscription
             _client.Log += Log;
             _client.MessageDeleted += MessageDeletedLogger;
+            _client.MessageUpdated += MessageUpdatedLogger;
 
             await RegisterCommandsAsync();
 
@@ -51,14 +52,18 @@ namespace Cute_Club_Bot
             await Task.Delay(-1);
         }
 
+        private async Task MessageUpdatedLogger(Cacheable<IMessage, ulong> arg1, SocketMessage arg2, ISocketMessageChannel arg3)
+        {
+            StreamWriter file = File.AppendText("../../Logging/editlog.txt");
+            file.Write($"[{arg1.Value.Timestamp}] {arg1.Value.Author}: {arg1.Value.Content}");
+            file.Close();
+        }
+
         private async Task MessageDeletedLogger(Cacheable<IMessage, ulong> arg1, ISocketMessageChannel arg2)
         {
             StreamWriter file = File.AppendText("../../Logging/deletionlog.txt");
             file.Write($"[{arg1.Value.Timestamp}] {arg1.Value.Author}: {arg1.Value.Content}");
             file.Close();
-            var u = _client.GetUser(arg1.Value.Author.Id);
-            var dmChannel = await u.GetOrCreateDMChannelAsync();
-            await dmChannel.SendMessageAsync("Your message was deleted and has been logged.");
         }
 
         private async Task RegisterCommandsAsync()
