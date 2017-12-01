@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
-using Discord.Commands;
-using System.Net.Http;
+﻿using Discord;
 using System.IO;
-using Discord;
+using System.Net.Http;
+using Discord.Commands;
 using Cute_Club_Bot.Jsons;
 using Cute_Club_Bot.Logging;
+using System.Threading.Tasks;
 
 namespace Cute_Club_Bot.Modules
 {

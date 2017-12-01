@@ -1,7 +1,7 @@
 ﻿using System.IO;
+using Discord.Commands;
 using Cute_Club_Bot.Jsons;
 using System.Threading.Tasks;
-using Discord.Commands;
 
 namespace Cute_Club_Bot.Logging
 {

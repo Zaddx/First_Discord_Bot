@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
-using Discord;
+﻿using Discord;
 using Discord.Commands;
 using Cute_Club_Bot.Jsons;
 using Cute_Club_Bot.Logging;
+using System.Threading.Tasks; 
 
 namespace Cute_Club_Bot.Modules
 {

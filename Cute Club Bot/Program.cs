@@ -1,13 +1,12 @@
-﻿using Discord;
+﻿using System;
+using Discord;
+using System.IO;
 using Discord.Commands;
 using Discord.WebSocket;
-using Microsoft.Extensions.DependencyInjection;
-using System;
 using System.Reflection;
-using System.Threading.Tasks;
 using Cute_Club_Bot.Jsons;
-using Cute_Club_Bot.Modules;
-using System.IO;
+using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Cute_Club_Bot
 {

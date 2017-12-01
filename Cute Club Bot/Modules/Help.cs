@@ -1,9 +1,9 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Discord;
+﻿using Discord;
+using System.Linq;
 using Discord.Commands;
-using Cute_Club_Bot.Jsons;
 using Discord.WebSocket;
+using Cute_Club_Bot.Jsons;
+using System.Threading.Tasks;
 
 namespace Cute_Club_Bot.Modules
 {
