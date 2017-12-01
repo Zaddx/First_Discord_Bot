@@ -1,5 +1,5 @@
-﻿using Newtonsoft.Json;
-using System.IO;
+﻿using System.IO;
+using Newtonsoft.Json;
 
 namespace Cute_Club_Bot.Jsons
 {
@@ -27,7 +27,7 @@ namespace Cute_Club_Bot.Jsons
 
         public BotConfiguration()
         {
-            StreamReader r = new StreamReader("../../Jsons/configure.json");
+            StreamReader r = new StreamReader("../../Jsons/config.json");
             string json = r.ReadToEnd();
             Configuration tempConfig = JsonConvert.DeserializeObject<Configuration>(json);
             this.config.Owner_Prefix = tempConfig.Owner_Prefix;
@@ -40,8 +40,9 @@ namespace Cute_Club_Bot.Jsons
 
         public void Serialize()
         {
-            StreamWriter file = File.CreateText("../../Jsons/configure.json");
+            StreamWriter file = File.CreateText("../../Jsons/config.json");
             JsonSerializer serializer = new JsonSerializer();
+            serializer.Formatting = Formatting.Indented;
             serializer.Serialize(file, config);
             file.Close();
         }

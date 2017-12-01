@@ -137,8 +137,12 @@
   <ItemGroup>
     <Compile Include="Jsons\BotSettings.cs" />
     <Compile Include="Jsons\BotConfiguration.cs" />
+    <Compile Include="Jsons\LoggingConfiguration.cs" />
+    <Compile Include="Logging\ChangeLog.cs" />
     <Compile Include="Modules\ChangeAvatar.cs" />
     <Compile Include="Modules\ChangeInviteChannel.cs" />
+    <Compile Include="Modules\ChangeLoggingChannel.cs" />
+    <Compile Include="Modules\ChangeLoggingType.cs" />
     <Compile Include="Modules\ChangeNickname.cs" />
     <Compile Include="Modules\ChangePrefix.cs" />
     <Compile Include="Modules\CreateInstantInvite.cs" />

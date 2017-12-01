@@ -1,12 +1,12 @@
-﻿using Discord;
+﻿using System;
+using Discord;
+using System.IO;
 using Discord.Commands;
 using Discord.WebSocket;
-using Microsoft.Extensions.DependencyInjection;
-using System;
 using System.Reflection;
-using System.Threading.Tasks;
 using Cute_Club_Bot.Jsons;
-using Cute_Club_Bot.Modules;
+using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Cute_Club_Bot
 {
@@ -21,14 +21,14 @@ namespace Cute_Club_Bot
 
         // Get the bot settings
         BotSettings _botSettings = new BotSettings();
-        BotConfiguration _botConfig = new BotConfiguration();
 
         public async Task RunBotAsync()
         {
             _client = new DiscordSocketClient(new DiscordSocketConfig
             {
                 //(WebSocketProvider = WS4NetProvider.Instance,)
-                LogLevel = LogSeverity.Verbose
+                LogLevel = LogSeverity.Verbose,
+                MessageCacheSize = 1000,
             });
             _commands = new CommandService();
 
@@ -39,6 +39,8 @@ namespace Cute_Club_Bot
 
             // Event Subscription
             _client.Log += Log;
+            _client.MessageDeleted += MessageDeletedLogger;
+            _client.MessageUpdated += MessageUpdatedLogger;
 
             await RegisterCommandsAsync();
 
@@ -46,15 +48,25 @@ namespace Cute_Club_Bot
 
             await _client.StartAsync();
 
-            // Keep the programming running
-            //while (true)
-            //{
-            //    await Task.Delay(1000);
-            //    // Check the temp channels
-            //    await CreateTemporaryChannel.CheckTemporaryChannels(_context);
-            //}
-
             await Task.Delay(-1);
+        }
+
+        private async Task MessageUpdatedLogger(Cacheable<IMessage, ulong> arg1, SocketMessage arg2, ISocketMessageChannel arg3)
+        {
+            StreamWriter file = File.AppendText("../../Logging/editlog.txt");
+            file.Write($"[{arg1.Value.Timestamp}] {arg1.Value.Author}: {arg1.Value.Content}");
+            file.Close();
+
+            await Task.Delay(1);
+        }
+
+        private async Task MessageDeletedLogger(Cacheable<IMessage, ulong> arg1, ISocketMessageChannel arg2)
+        {
+            StreamWriter file = File.AppendText("../../Logging/deletionlog.txt");
+            file.Write($"[{arg1.Value.Timestamp}] {arg1.Value.Author}: {arg1.Value.Content}");
+            file.Close();
+
+            await Task.Delay(1);
         }
 
         private async Task RegisterCommandsAsync()
@@ -72,10 +84,10 @@ namespace Cute_Club_Bot
 
             int argPos = 0;
 
-            if (message.HasStringPrefix(_botConfig.config.Everyone_Prefix, ref argPos) ||
-                message.HasStringPrefix(_botConfig.config.Mod_Prefix, ref argPos) ||
-                message.HasStringPrefix(_botConfig.config.Admin_Prefix, ref argPos) ||
-                message.HasStringPrefix(_botConfig.config.Owner_Prefix, ref argPos) ||
+            if (message.HasStringPrefix(new BotConfiguration().config.Everyone_Prefix, ref argPos) ||
+                message.HasStringPrefix(new BotConfiguration().config.Mod_Prefix, ref argPos) ||
+                message.HasStringPrefix(new BotConfiguration().config.Admin_Prefix, ref argPos) ||
+                message.HasStringPrefix(new BotConfiguration().config.Owner_Prefix, ref argPos) ||
                 message.HasMentionPrefix(_client.CurrentUser, ref argPos))
             {
                 _context = new SocketCommandContext(_client, message);

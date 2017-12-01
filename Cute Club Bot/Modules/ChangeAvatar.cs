@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
-using Discord.Commands;
-using System.Net.Http;
+﻿using Discord;
 using System.IO;
-using Discord;
+using System.Net.Http;
+using Discord.Commands;
 using Cute_Club_Bot.Jsons;
+using Cute_Club_Bot.Logging;
+using System.Threading.Tasks;
 
 namespace Cute_Club_Bot.Modules
 {
@@ -40,8 +41,7 @@ namespace Cute_Club_Bot.Modules
             }
 
             await ReplyAsync("Avatar changed successfully.");
-            var dm = await C.GetOrCreateDMChannelAsync();
-            await dm.SendMessageAsync($"{Context.Message.Author} changed avatar to {url}.");
+            await new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author} changed avatar to {url}.", Context);
         }
     }
 }

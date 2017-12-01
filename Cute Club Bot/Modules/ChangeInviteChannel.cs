@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Discord;
+﻿using Discord;
 using Discord.Commands;
 using Cute_Club_Bot.Jsons;
+using Cute_Club_Bot.Logging;
+using System.Threading.Tasks; 
 
 namespace Cute_Club_Bot.Modules
 {
@@ -25,8 +22,7 @@ namespace Cute_Club_Bot.Modules
             botConfig.Serialize();
 
             await ReplyAsync($"Invite Channel has been changed to {channel} successfully.");
-            var dm = await C.GetOrCreateDMChannelAsync();
-            await dm.SendMessageAsync($"{Context.Message.Author} changed invite channel to {channel}.");
+            await new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author} changed invite channel to {channel}.", Context);
         }
     }
 }
