@@ -41,7 +41,7 @@ namespace Cute_Club_Bot.Modules
             }
 
             await ReplyAsync("Avatar changed successfully.");
-            new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author} changed avatar to {url}.");
+            await new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author} changed avatar to {url}.", Context);
         }
     }
 }

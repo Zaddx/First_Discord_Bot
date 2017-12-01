@@ -1,14 +1,36 @@
 ﻿using System.IO;
+using Cute_Club_Bot.Jsons;
+using System.Threading.Tasks;
+using Discord.Commands;
 
 namespace Cute_Club_Bot.Logging
 {
     public class ChangeLog
     {
-        public void LogChange(string message)
+        public async Task LogChange(string message, ICommandContext context)
         {
-            StreamWriter file = File.AppendText("../../Logging/changelog.txt");
-            file.Write($"{message}\n");
-            file.Close();
+            if (new LoggingConfiguration().config.LogType == "File")
+            {
+                StreamWriter file = File.AppendText("../../Logging/changelog.txt");
+                file.Write($"{message}\n");
+                file.Close();
+            }
+            else if (new LoggingConfiguration().config.LogType == "Channel")
+            {
+                var g = context.Guild;
+                var channels = await g.GetTextChannelsAsync();
+
+                foreach (var channel in channels)
+                    if (channel.Name == new LoggingConfiguration().config.LogChannel)
+                        await channel.SendMessageAsync($"{message}");
+            }
+            else
+            {
+                var app = await context.Client.GetApplicationInfoAsync();
+                var C = app.Owner;
+                var dmChannel = await C.GetOrCreateDMChannelAsync();
+                await dmChannel.SendMessageAsync($"An error occured in the LogChange function.\n Message being sent: {message}");
+            }
         }
     }
 }

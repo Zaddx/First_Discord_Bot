@@ -34,6 +34,7 @@ namespace Cute_Club_Bot.Jsons
         {
             StreamWriter file = File.CreateText("../../Jsons/botsettings.json");
             JsonSerializer serializer = new JsonSerializer();
+            serializer.Formatting = Formatting.Indented;
             serializer.Serialize(file, settings);
             file.Close();
         }

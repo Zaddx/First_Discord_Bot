@@ -1,0 +1,4 @@
+{	// Log Type: "Channel" = puts info into a specified channel, "File" = puts info into a file
+	"Log Type" : "Channel",
+	"Log Channel" : "Bot Log",
+}

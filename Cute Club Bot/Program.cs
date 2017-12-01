@@ -57,6 +57,8 @@ namespace Cute_Club_Bot
             StreamWriter file = File.AppendText("../../Logging/editlog.txt");
             file.Write($"[{arg1.Value.Timestamp}] {arg1.Value.Author}: {arg1.Value.Content}");
             file.Close();
+
+            await Task.Delay(1);
         }
 
         private async Task MessageDeletedLogger(Cacheable<IMessage, ulong> arg1, ISocketMessageChannel arg2)
@@ -64,6 +66,8 @@ namespace Cute_Club_Bot
             StreamWriter file = File.AppendText("../../Logging/deletionlog.txt");
             file.Write($"[{arg1.Value.Timestamp}] {arg1.Value.Author}: {arg1.Value.Content}");
             file.Close();
+
+            await Task.Delay(1);
         }
 
         private async Task RegisterCommandsAsync()

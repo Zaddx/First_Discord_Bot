@@ -25,7 +25,7 @@ namespace Cute_Club_Bot.Modules
             botConfig.Serialize();
 
             await ReplyAsync($"The everyone prefix has been changed to {prefix} successfully.");
-            new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author} changed everyone prefix to {prefix}.");
+            await new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author} changed everyone prefix to {prefix}.", Context);
         }
 
         [Command("Mod")]
@@ -42,7 +42,7 @@ namespace Cute_Club_Bot.Modules
             botConfig.Serialize();
 
             await ReplyAsync($"The mod prefix has been changed to {prefix} successfully.");
-            new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author} changed everyone prefix to {prefix}.");
+            await new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author} changed everyone prefix to {prefix}.", Context);
         }
 
         [Command("Admin")]
@@ -59,7 +59,7 @@ namespace Cute_Club_Bot.Modules
             botConfig.Serialize();
 
             await ReplyAsync($"The admin prefix has been changed to {prefix} successfully.");
-            new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author} changed everyone prefix to {prefix}.");
+            await new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author} changed everyone prefix to {prefix}.", Context);
         }
 
         [Command("Owner")]
@@ -76,7 +76,7 @@ namespace Cute_Club_Bot.Modules
             botConfig.Serialize();
 
             await ReplyAsync($"The owner prefix has been changed to {prefix} successfully.");
-            new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author} changed everyone prefix to {prefix}.");
+            await new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author} changed everyone prefix to {prefix}.", Context);
         }
     }
 }

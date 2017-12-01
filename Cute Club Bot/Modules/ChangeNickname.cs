@@ -28,7 +28,7 @@ namespace Cute_Club_Bot.Modules
             });
 
             await ReplyAsync($"Nickname has been changed to {pNickname} successfully.");
-            new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author} changed bot nickname to {pNickname}.");
+            await new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author} changed bot nickname to {pNickname}.", Context);
         }
     }
 }
