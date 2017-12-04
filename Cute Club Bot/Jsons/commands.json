@@ -1,6 +1,10 @@
 { 	// 0 == True == Enable, 1 == False == Disabled
-	"Change Avatar" : "0",
-	"Change Nickname" : "0",
-	"Change Prefix" : "0",
-	"CreateInstantInvite" : "0",
+	"Change Avatar" : true,
+	"Change Nickname" : true,
+	"Change Prefix" : true,
+	"Change Invite Channel" : true,
+	"Change Logging Type" : true,
+	"Change Logging Channel" : true,
+	"Create Instant Invite" : true,
+	"Logging" : true,
 }
