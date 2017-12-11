@@ -5,6 +5,7 @@ using Discord.Commands;
 using Cute_Club_Bot.Jsons;
 using Cute_Club_Bot.Logging;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace Cute_Club_Bot.Modules
 {
@@ -17,20 +18,20 @@ namespace Cute_Club_Bot.Modules
         public async Task DeleteMessages(IGuildUser user, IMessageChannel channel = null)
         {
             System.Collections.Generic.IEnumerable<IMessage> msgs = null;
+            List<IMessage> deleteMsgs = new List<IMessage>();
             if (channel == null)
             {
                 channel = Context.Channel;
                 msgs = await Context.Channel.GetMessagesAsync().Flatten();
             }
             else
-            {
-                var c = await Context.Guild.GetTextChannelAsync(channel.Id);
-                msgs = await c.GetMessagesAsync().Flatten();
-            }
+                msgs = await channel.GetMessagesAsync().Flatten();
 
             foreach (var msg in msgs)
                 if (msg.Author == user)
-                    await msg.DeleteAsync();
+                    deleteMsgs.Add(msg);
+
+            await channel.DeleteMessagesAsync(deleteMsgs);
 
             await new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author.Mention} deleted messages from {user.Nickname} in {MentionUtils.MentionChannel(channel.Id)}.", Context);
         }
