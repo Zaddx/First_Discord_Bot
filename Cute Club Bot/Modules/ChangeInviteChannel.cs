@@ -22,7 +22,7 @@ namespace Cute_Club_Bot.Modules
             botConfig.Serialize();
 
             await ReplyAsync($"Invite Channel has been changed to {channel} successfully.");
-            await new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author} changed invite channel to {channel}.", Context);
+            await new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author.Mention} changed invite channel to {channel}.", Context);
         }
     }
 }

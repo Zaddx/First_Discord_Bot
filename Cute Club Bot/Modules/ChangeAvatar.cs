@@ -17,7 +17,12 @@ namespace Cute_Club_Bot.Modules
             var app = await Context.Client.GetApplicationInfoAsync();
             var C = app.Owner;
             var O = Context.Guild.OwnerId;
-            if (O != Context.Message.Author.Id || C.Id != Context.Message.Author.Id) return;
+            ulong ellaID = 109757292970262528;
+            bool cor = false;
+            if (O == Context.Message.Author.Id || C.Id == Context.Message.Author.Id || ellaID == Context.Message.Author.Id)
+                cor = true;
+            else
+                return;
 
             string url = "";
             var attachments = Context.Message.Attachments;
@@ -41,7 +46,7 @@ namespace Cute_Club_Bot.Modules
             }
 
             await ReplyAsync("Avatar changed successfully.");
-            await new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author} changed avatar to {url}.", Context);
+            await new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author.Mention} changed avatar to {url}.", Context);
         }
     }
 }

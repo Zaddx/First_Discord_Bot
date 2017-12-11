@@ -17,12 +17,16 @@ namespace Cute_Club_Bot.Logging
             }
             else if (new LoggingConfiguration().config.LogType == "Channel")
             {
-                var g = context.Guild;
-                var channels = await g.GetTextChannelsAsync();
+                var gs = await context.Client.GetGuildsAsync();
 
-                foreach (var channel in channels)
-                    if (channel.Name == new LoggingConfiguration().config.LogChannel)
-                        await channel.SendMessageAsync($"{message}");
+                foreach (var g in gs)
+                {
+                    var channels = await g.GetTextChannelsAsync();
+
+                    foreach (var channel in channels)
+                        if (channel.Name == new LoggingConfiguration().config.LogChannel)
+                            await channel.SendMessageAsync($"{message}");
+                }
             }
             else
             {

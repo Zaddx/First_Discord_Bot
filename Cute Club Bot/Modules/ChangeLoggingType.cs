@@ -22,7 +22,7 @@ namespace Cute_Club_Bot.Modules
             logging.Serialize();
 
             await ReplyAsync($"Logging type has been changed to {logType} successfully.");
-            await new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author} changed logging type to {logType}.", Context);
+            await new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author.Mention} changed logging type to {logType}.", Context);
         }
     }
 }

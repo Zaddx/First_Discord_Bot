@@ -14,21 +14,30 @@ namespace Cute_Club_Bot.Modules
             var app = await Context.Client.GetApplicationInfoAsync();
             var C = app.Owner;
             var O = Context.Guild.OwnerId;
-            if (O != Context.Message.Author.Id || C.Id != Context.Message.Author.Id) return;
+            ulong ellaID = 109757292970262528;
+            bool cor = false;
+            if (O == Context.Message.Author.Id || C.Id == Context.Message.Author.Id || ellaID == Context.Message.Author.Id)
+                cor = true;
+            else
+                return;
 
             BotSettings temp = new BotSettings();
             temp.settings.Nickname = pNickname;
             temp.Serialize();
 
-            var guild = await Context.Client.GetGuildAsync(342379038243028992);
-            var user = await guild.GetUserAsync(Context.Client.CurrentUser.Id);
-            await user.ModifyAsync(x =>
+            
+            var guilds = await Context.Client.GetGuildsAsync();
+            foreach (var g in guilds)
             {
-                x.Nickname = temp.settings.Nickname;
-            });
+                var user = await g.GetUserAsync(Context.Client.CurrentUser.Id);
+                await user.ModifyAsync(x =>
+                {
+                    x.Nickname = temp.settings.Nickname;
+                });
+            }
 
             await ReplyAsync($"Nickname has been changed to {pNickname} successfully.");
-            await new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author} changed bot nickname to {pNickname}.", Context);
+            await new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author.Mention} changed bot nickname to {pNickname}.", Context);
         }
     }
 }

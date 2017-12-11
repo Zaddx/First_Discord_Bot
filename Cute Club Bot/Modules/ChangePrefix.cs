@@ -22,7 +22,7 @@ namespace Cute_Club_Bot.Modules
             botConfig.Serialize();
 
             await ReplyAsync($"The everyone prefix has been changed to {prefix} successfully.");
-            await new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author} changed everyone prefix to {prefix}.", Context);
+            await new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author.Mention} changed everyone prefix to {prefix}.", Context);
         }
 
         [Command("Mod")]
@@ -39,7 +39,7 @@ namespace Cute_Club_Bot.Modules
             botConfig.Serialize();
 
             await ReplyAsync($"The mod prefix has been changed to {prefix} successfully.");
-            await new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author} changed mod prefix to {prefix}.", Context);
+            await new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author.Mention} changed mod prefix to {prefix}.", Context);
         }
 
         [Command("Admin")]
@@ -56,7 +56,7 @@ namespace Cute_Club_Bot.Modules
             botConfig.Serialize();
 
             await ReplyAsync($"The admin prefix has been changed to {prefix} successfully.");
-            await new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author} changed admin prefix to {prefix}.", Context);
+            await new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author.Mention} changed admin prefix to {prefix}.", Context);
         }
 
         [Command("Owner")]
@@ -73,7 +73,7 @@ namespace Cute_Club_Bot.Modules
             botConfig.Serialize();
 
             await ReplyAsync($"The owner prefix has been changed to {prefix} successfully.");
-            await new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author} changed owner prefix to {prefix}.", Context);
+            await new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author.Mention} changed owner prefix to {prefix}.", Context);
         }
     }
 }

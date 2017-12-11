@@ -22,7 +22,7 @@ namespace Cute_Club_Bot.Modules
             logging.Serialize();
 
             await ReplyAsync($"Logging Channel has been changed to {channel} successfully.");
-            await new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author} changed logging channel to {channel}.", Context);
+            await new ChangeLog().LogChange($"[{Context.Message.Timestamp}]: {Context.Message.Author.Mention} changed logging channel to {channel}.", Context);
         }
     }
 }

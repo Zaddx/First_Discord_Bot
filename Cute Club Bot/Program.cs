@@ -42,6 +42,8 @@ namespace Cute_Club_Bot
             _client.MessageDeleted += MessageDeletedLogger;
             _client.MessageUpdated += MessageUpdatedLogger;
 
+            await _client.SetGameAsync("Murder Simulator");
+
             await RegisterCommandsAsync();
 
             await _client.LoginAsync(TokenType.Bot, _botSettings.settings.Token);
@@ -63,7 +65,7 @@ namespace Cute_Club_Bot
         private async Task MessageDeletedLogger(Cacheable<IMessage, ulong> arg1, ISocketMessageChannel arg2)
         {
             StreamWriter file = File.AppendText("../../Logging/deletionlog.txt");
-            file.Write($"[{arg1.Value.Timestamp}] {arg1.Value.Author}: {arg1.Value.Content}");
+            file.Write($"[{arg1.Value.Timestamp}] {arg1.Value.Author}: {arg1.Value.Content}\n");
             file.Close();
 
             await Task.Delay(1);
