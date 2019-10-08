@@ -1,4 +1,4 @@
-# Cute Club Bot
+# First Discord Bot
 
 This bot is specifically made for the Cute Club discord server. This may change at a later time, but for now until, more testing it will be private. If you would like to add the bot to your server, you may download it and run the program on your own, until it's publicly released.
 
